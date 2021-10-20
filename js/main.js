@@ -46,7 +46,7 @@ function writeGrid(GENERATION_KEY){
                 endGameAnimation('WON')
             }
             if(!isNaN(currentScore)){ //to not display NaN when game ends
-                box.lastChild.src = '../img/wooden-box-alt.png'
+                box.lastChild.src = 'img/wooden-box-alt.png'
                 scoreOutput.textContent = currentScore
             }
         })
