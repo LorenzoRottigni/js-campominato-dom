@@ -39,12 +39,16 @@ function writeGrid(GENERATION_KEY){
         box.appendChild(boxImg)
         //add click listener on new box
         box.addEventListener('click', () => {
-            box.lastChild.src = '../img/wooden-box-alt.png'
+            //increment current score
             let currentScore = parseInt(scoreOutput.textContent)+1;
+            //if score is equal to all boxes less 16 bomb you win
             if(currentScore === (GENERATION_KEY - 16)){
-                endGameAnimation('WON');
+                endGameAnimation('WON')
             }
-            scoreOutput.textContent = currentScore
+            if(!isNaN(currentScore)){ //to not display NaN when game ends
+                box.lastChild.src = '../img/wooden-box-alt.png'
+                scoreOutput.textContent = currentScore
+            }
         })
         //get target for new box
         row = document.getElementById('row-' + k)
@@ -53,10 +57,6 @@ function writeGrid(GENERATION_KEY){
     }
 }
 
-
-
-//add event listener to boxes
-//setEventListeners();
 //get level selector
 const choosenLevel = document.querySelector('select');
 //at level selector input change
@@ -81,7 +81,7 @@ choosenLevel.addEventListener('change', () => {
             document.write("there's a client side error")
     }
 })
-//write default grid 100 boxws = 10x10
+//write default grid 100 boxes = 10x10
 const headerButton = document.querySelector('header button');
 headerButton.addEventListener('click', () => {
     writeGrid(100);
