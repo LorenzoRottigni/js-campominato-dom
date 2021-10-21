@@ -1,6 +1,6 @@
-
 function bombPlacer(bombNumber, gridSize) {
     const bombPositionsArray = []
+
     for (let i = 0; i < bombNumber; i++) {
         do{//do while generated int is already in array
             randomInt = Math.floor(Math.random() * gridSize);
@@ -8,14 +8,22 @@ function bombPlacer(bombNumber, gridSize) {
         //push rand int in bomb array
         bombPositionsArray.push(randomInt);
         //get the bomb indexed box
-        const bombTarget = document.querySelector('#box-'+bombPositionsArray[i])
+        const bombTarget = document.getElementById('box-'+bombPositionsArray[i])
+        console.log('box-'+bombPositionsArray[i]);
         //add bomb event to indexed box
-        
         bombTarget.firstChild.addEventListener('click', () => {
-            bombTarget.lastChild.src = '../img/bomb.png'
+            //show all placed bombs
+            for (let i = 0; i < bombPositionsArray.length; i++) {
+                const element = document.querySelector('#box-'+bombPositionsArray[i]);
+                element.lastChild.src = '../img/bomb.png'
+                element.style.backgroundColor = '#ffc107'
+            }
             bombTarget.firstChild.textContent = ''
+            //set background of the exploded bomb
             bombTarget.style.backgroundColor = 'red'
+            //show lose animation
             endGameAnimation('LOST', gridSize);
+            //reset score
             scoreOutput.textContent = ''
         })
     }
@@ -35,7 +43,7 @@ function isExisting(number, array){
 function endGameAnimation(esit, gridSize){
     //get the whole grid section
     const animatedElement = document.getElementById('game-container')
-    animatedElement.style.transition = '2s'
+    animatedElement.style.transition = '8s'
     animatedElement.style.opacity = '0'
     animatedElement.style.transform = 'translateX(-100%)'
     //get the top score counter
@@ -53,6 +61,7 @@ function endGameAnimation(esit, gridSize){
     loseButton.addEventListener('click', () => {
         loseContainer.style.display = 'none'
         animatedElement.style.opacity = '1'
+        animatedElement.style.transition = '2s'
         animatedElement.style.transform = 'translateX(0)'
         writeGrid(gridSize);
         bombPlacer(16,gridSize);

@@ -27,6 +27,7 @@ function writeGrid(GENERATION_KEY){
         const box = document.createElement("div");
         //add id to new box
         box.setAttribute('id','box-'+i)
+        console.log(box.id)
         //add classes to new box
         box.classList.add('box1x1','ratio','ratio1x1','rounded','shadow')
         //ad text to new box
@@ -38,21 +39,23 @@ function writeGrid(GENERATION_KEY){
         //append wooden box image to new box
         box.appendChild(boxImg)
         //add click listener on new box
-        box.addEventListener('click', () => {
-            //increment current score
-            let currentScore = parseInt(scoreOutput.textContent)+1;
-            //if score is equal to all boxes less 16 bomb you win
-            if(currentScore === (GENERATION_KEY - 16)){
-                endGameAnimation('WON')
-            }
-            if(!isNaN(currentScore)){ //to not display NaN when game ends
-                box.lastChild.src = 'img/wooden-box-alt.png'
-                scoreOutput.textContent = currentScore
-            }
+        box.addEventListener('click', function boxClickEvent(){
+                //increment current score
+                let currentScore = parseInt(scoreOutput.textContent)+1;
+                //if score is equal to all boxes less 16 bomb you win
+                if(currentScore === (GENERATION_KEY - 16)){
+                    endGameAnimation('WON')
+                }
+                if(!isNaN(currentScore)){ //to not display NaN when game ends
+                    box.lastChild.src = '../img/wooden-box-alt.png'
+                    scoreOutput.textContent = currentScore
+                    box.removeEventListener('click', boxClickEvent)
+                }
         })
         //get target for new box
         row = document.getElementById('row-' + k)
         //append new box to the indexed row
+        console.log('appending box to tow')
         row.appendChild(box);
     }
 }
