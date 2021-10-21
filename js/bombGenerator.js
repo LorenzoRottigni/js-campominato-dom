@@ -58,7 +58,9 @@ function endGameAnimation(esit, gridSize){
     const loseButton = document.createElement('button')
     loseButton.classList.add('btn','btn-outline-success')
     loseButton.textContent = 'Play again'
+    //play again button listener
     loseButton.addEventListener('click', () => {
+        //reset all positions and grid contents
         loseContainer.style.display = 'none'
         animatedElement.style.opacity = '1'
         animatedElement.style.transition = '2s'

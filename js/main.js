@@ -49,6 +49,7 @@ function writeGrid(GENERATION_KEY){
                 if(!isNaN(currentScore)){ //to not display NaN when game ends
                     box.lastChild.src = '../img/wooden-box-alt.png'
                     scoreOutput.textContent = currentScore
+                    //remove listner after first play
                     box.removeEventListener('click', boxClickEvent)
                 }
         })
